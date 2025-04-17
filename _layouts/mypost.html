@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 {% include head.html -%}
+
 <body>
-{% include header.html -%}
-<div class="page page-post">
-  <h1 class="title" id="{{ page.title }}">{{ page.title }}</h1>
-  {% if page.date %}
-  <div class="subtitle">
-    <span>{{site.author}} 于 {{ page.date | date: "%Y-%m-%d" }} 发布</span>
-    {%- if site.extCount %}
+  {% include header.html -%}
+  <div class="page page-post">
+    <h1 class="title" id="{{ page.title }}">{{ page.title }}</h1>
+    {% if page.date %}
+    <div class="subtitle">
+      <span>{{site.author}} 于 {{ page.date | date: "%Y-%m-%d" }} 发布</span>
+      {%- if site.extCount %}
       <span>浏览量</span>
       <span id="busuanzi_value_page_pv"></span>
+      {% endif %}
+    </div>
+    {% endif %}
+    <!-- 在<div class="post">上方添加目录 -->
+    <div class="post-toc">
+      {% if page.toc %}
+      {% include toc.html html=content sanitize=true class="inline_toc" id="my_toc" h_min=2 h_max=3 %}
+      {% endif %}
+    </div>
+    <div class="post">
+      {{ content }}
+    </div>
+    <div class="post">
+      {{ content }}
+    </div>
+    {% if site.extAdsense -%}
+    <div class="adsense" style="overflow: hidden;">
+      {% include ext-adsense.html -%}
+    </div>
     {% endif %}
   </div>
-  {% endif %}
-  <div class="post">
-    {{ content }}
-  </div>
-  {% if site.extAdsense -%}
-  <div class="adsense" style="overflow: hidden;">
-    {% include ext-adsense.html -%}
-  </div>
-  {% endif %}
-</div>
-{% include footer.html -%}
-{% include script.html -%}
+  {% include footer.html -%}
+  {% include script.html -%}
 </body>
+
 </html>

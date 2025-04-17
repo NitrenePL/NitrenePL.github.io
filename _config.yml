@@ -9,6 +9,7 @@ plugins:
 # 这些不要动
 permalink: /posts/:year/:month/:day/:title.html
 kramdown:
+  toc_levels: 2..4
   auto_ids: true
   input: GFM
   syntax_highlighter: rouge
